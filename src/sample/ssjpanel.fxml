@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="429.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+      <Pane prefHeight="27.0" prefWidth="607.0" style="-fx-background-color: orange;">
+         <children>
+            <Label layoutX="213.0" layoutY="5.0" text="LV" />
+            <ProgressBar fx:id="levelBar" layoutX="101.0" layoutY="4.0" prefHeight="18.0" prefWidth="108.0" progress="0.0" />
+            <Label fx:id="lv" layoutX="231.0" layoutY="5.0" text="---" />
+            <Label layoutX="2.0" layoutY="5.0" prefHeight="17.0" prefWidth="95.0" text="User" />
+            <Label fx:id="class1" layoutX="439.0" layoutY="4.0" prefHeight="17.0" prefWidth="108.0" text="Base Form" />
+            <Label layoutX="264.0" layoutY="4.0" text="POWER:" />
+            <Label fx:id="totalExp" layoutX="311.0" layoutY="-2.0" prefHeight="27.0" prefWidth="127.0" text="--" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="549.0" layoutY="3.0" text="VER 0.01" textFill="WHITE" />
+         </children></Pane>
+      <TabPane layoutY="28.0" prefHeight="401.0" prefWidth="607.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Log in">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: black;">
+                     <children>
+                        <ImageView fitHeight="373.0" fitWidth="607.0" opacity="0.35" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/233335.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="186.0" layoutY="24.0" text="Welcome" textFill="#fbff00" visible="false">
+                           <font>
+                              <Font size="57.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="90.0" layoutY="94.0" text="Dragon Ball Workout Application alpha version!" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="80.0" layoutY="110.0" text="Track your workouts and progress with Dragon " textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="247.0" layoutY="128.0" prefWidth="83.0" text="Ball style!" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="152.0" layoutY="152.0" text="You will gain exp with each exercise done" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="119.0" layoutY="164.0" text="If you reach certain amount of exp you will level up!" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="144.0" layoutY="177.0" text="Compete against other fans in Hall of Fame!" textFill="WHITE" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="38.0" layoutY="227.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="170.0" layoutY="-13.0" text="WARNING!" textFill="RED">
+                           <font>
+                              <Font size="54.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="51.0" layoutY="83.0" text="Please exercise with Caution and get plenty of rest!" textFill="#fffc00">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="62.0" layoutY="55.0" text="We are not responsible for any injuries or trauma caused by your training" textFill="#ff6060">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="71.0" text="This application is made by fans for people who enjoy healthly lifestyle and Dragon Ball" textFill="#ff4444">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="facebookLogIn" disable="true" fitHeight="73.0" fitWidth="254.0" layoutX="171.0" layoutY="204.0" opacity="0.3" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/facebook-sign-in-button-png-26.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                        <TextField disable="true" layoutX="178.0" layoutY="160.0" prefHeight="25.0" prefWidth="239.0" promptText="Username" />
+                        <PasswordField disable="true" layoutX="178.0" layoutY="190.0" prefHeight="25.0" prefWidth="239.0" promptText="Password" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Avatar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: orange;">
+                     <children>
+                        <Pane prefHeight="345.0" prefWidth="607.0" style="-fx-background-color: orange;">
+                           <children>
+                              <ImageView fitHeight="315.0" fitWidth="614.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@PICS/thumb-1920-677266.png" />
+                                 </image>
+                              </ImageView>
+                              <ProgressBar fx:id="staminaBar" layoutX="8.0" layoutY="135.0" prefHeight="18.0" prefWidth="216.0" progress="0.0" />
+                              <Label layoutX="234.0" layoutY="136.0" text="Endurance" />
+                              <ProgressBar fx:id="strengthBar" layoutX="8.0" layoutY="155.0" prefHeight="18.0" prefWidth="216.0" progress="0.0" />
+                              <Label layoutX="234.0" layoutY="156.0" text="Strength" />
+                              <Label layoutX="13.0" layoutY="63.0" text="EXP: " />
+                              <Label fx:id="userExp" layoutX="97.0" layoutY="63.0" text="--" textFill="#00ff15" />
+                              <Label layoutX="12.0" layoutY="80.0" text="NEXT LEVEL:" />
+                              <Label fx:id="userExp2" layoutX="97.0" layoutY="80.0" text="--" textFill="#00ff6f" />
+                              <ProgressBar layoutX="8.0" layoutY="175.0" prefHeight="18.0" prefWidth="216.0" progress="0.0" />
+                              <Label layoutX="234.0" layoutY="176.0" text="Speed" />
+                              <ImageView fitHeight="358.0" fitWidth="185.0" layoutX="410.0" layoutY="-3.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@PICS/Goku_ssj_by_dbzandsm-d4s2cd4.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Workouts">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="380.0" fitWidth="614.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/Dragon-Ball-wallpaper-with-Mix-Character-in-High-Resolution.jpg" />
+                           </image>
+                        </ImageView>
+                        <ScrollPane layoutY="-1.0" prefHeight="374.0" prefWidth="172.0" style="-fx-border-color: black; -fx-border-width: 2;">
+                           <content>
+                              <TableView prefHeight="358.0" prefWidth="595.0" style="-fx-background-color: orange;">
+                                <columns>
+                                  <TableColumn prefWidth="152.66665148735046" text="Workout" />
+                                    <TableColumn prefWidth="124.00004577636719" text="Date" />
+                                    <TableColumn prefWidth="75.0" text="Exp Gained" />
+                                    <TableColumn prefWidth="227.99996948242188" text="Notes" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Log Workout">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="378.0" fitWidth="614.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/goku_training_with_100g_by_sunnydjoka-d90wcbd.jpg" />
+                           </image>
+                        </ImageView>
+                        <ComboBox fx:id="bodyPart" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Body Part" />
+                        <ComboBox layoutX="179.0" layoutY="13.0" prefWidth="150.0" promptText="Name" />
+                        <ComboBox layoutX="346.0" layoutY="13.0" prefWidth="150.0" promptText="Exercise Type" />
+                        <ComboBox layoutX="14.0" layoutY="48.0" prefWidth="150.0" promptText="Reps" />
+                        <ComboBox layoutX="179.0" layoutY="48.0" prefWidth="150.0" promptText="Sets" />
+                        <DatePicker layoutX="14.0" layoutY="331.0" prefHeight="25.0" prefWidth="131.0" promptText="Workout Date" />
+                        <ScrollPane layoutX="14.0" layoutY="126.0" prefHeight="202.0" prefWidth="549.0">
+                           <content>
+                              <TableView prefHeight="201.0" prefWidth="592.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="Exercise" />
+                                  <TableColumn prefWidth="75.0" text="Body Part" />
+                                    <TableColumn prefWidth="96.66667175292969" text="Type" />
+                                    <TableColumn prefWidth="54.0" text="Reps" />
+                                    <TableColumn prefWidth="56.0" text="Sets" />
+                                    <TableColumn prefWidth="68.6666259765625" text="Weight" />
+                                    <TableColumn prefWidth="69.99993896484375" text="Time" />
+                                    <TableColumn prefWidth="80.00003051757812" text="Exp" />
+                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
+                        <Button defaultButton="true" layoutX="436.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Save" />
+                        <TextField layoutX="347.0" layoutY="48.0" promptText="Weight(kg)" />
+                        <TextField layoutX="14.0" layoutY="81.0" promptText="Time(sec)" />
+                        <TextField layoutX="152.0" layoutY="331.0" prefHeight="25.0" prefWidth="115.0" promptText="Name Workout" />
+                        <Button defaultButton="true" layoutX="509.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Add" />
+                        <ScrollPane layoutX="180.0" layoutY="78.0">
+                           <content>
+                              <TextArea prefHeight="43.0" prefWidth="309.0" promptText="Notes" />
+                           </content>
+                        </ScrollPane>
+                        <TextField disable="true" editable="false" layoutX="273.0" layoutY="331.0" prefWidth="155.0" promptText="Total EXP " style="-fx-border-color: null;" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Hall of Fame">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="373.0" fitWidth="614.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/Dragon-ball-z-raging-blast-2-cartoon-hd-image-wallpaper-galaxy-s6.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView layoutX="7.0" layoutY="10.0" prefHeight="349.0" prefWidth="271.0" style="-fx-background-color: orange;">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Username" />
+                            <TableColumn prefWidth="75.0" text="Level" />
+                              <TableColumn prefWidth="119.33334859212238" text="PowerLevel" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="achievement" text="Achievements">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="372.0" fitWidth="616.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/c3800c8f5826a0d06346d59c31922af5.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="14.0" layoutY="32.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@PICS/4_Star_Dragon_Ball_Edit.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="itsOver9000" fitHeight="63.0" fitWidth="82.0" layoutX="88.0" layoutY="32.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@PICS/Scouter.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="itsover15000" fitHeight="98.0" fitWidth="99.0" layoutX="166.0" layoutY="14.0" opacity="0.19" pickOnBounds="true">
+                           <image>
+                              <Image url="@PICS/Goku_Kaioken.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
