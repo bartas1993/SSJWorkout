@@ -29,9 +29,9 @@
             <ProgressBar fx:id="levelBar" layoutX="101.0" layoutY="4.0" prefHeight="18.0" prefWidth="108.0" progress="0.0" />
             <Label fx:id="lv" layoutX="231.0" layoutY="5.0" text="---" />
             <Label layoutX="2.0" layoutY="5.0" prefHeight="17.0" prefWidth="95.0" text="User" />
-            <Label fx:id="class1" layoutX="439.0" layoutY="4.0" prefHeight="17.0" prefWidth="108.0" text="Base Form" />
-            <Label layoutX="264.0" layoutY="4.0" text="POWER:" />
-            <Label fx:id="totalExp" layoutX="311.0" layoutY="-2.0" prefHeight="27.0" prefWidth="127.0" text="--" textFill="RED">
+            <Label fx:id="class1" layoutX="430.0" layoutY="4.0" prefHeight="17.0" prefWidth="108.0" text="Base Form" />
+            <Label layoutX="249.0" layoutY="4.0" text="POWER:" />
+            <Label fx:id="totalExp" layoutX="295.0" layoutY="-2.0" prefHeight="27.0" prefWidth="127.0" text="--" textFill="RED">
                <font>
                   <Font size="18.0" />
                </font>
@@ -188,9 +188,8 @@
                               <Image url="@PICS/goku_training_with_100g_by_sunnydjoka-d90wcbd.jpg" />
                            </image>
                         </ImageView>
-                        <ComboBox fx:id="bodyPart" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Body Part" />
-                        <ComboBox layoutX="179.0" layoutY="13.0" prefWidth="150.0" promptText="Name" />
-                        <ComboBox layoutX="346.0" layoutY="13.0" prefWidth="150.0" promptText="Exercise Type" />
+                        <ComboBox fx:id="bodyPart" layoutX="14.0" layoutY="13.0" onAction="#getBiceps" prefWidth="150.0" promptText="Body Part" />
+                        <ComboBox fx:id="exerciseBox" layoutX="179.0" layoutY="13.0" onAction="#getBiceps" prefWidth="150.0" promptText="Exercise Name" />
                         <ComboBox layoutX="14.0" layoutY="48.0" prefWidth="150.0" promptText="Reps" />
                         <ComboBox layoutX="179.0" layoutY="48.0" prefWidth="150.0" promptText="Sets" />
                         <DatePicker layoutX="14.0" layoutY="331.0" prefHeight="25.0" prefWidth="131.0" promptText="Workout Date" />
@@ -213,7 +212,7 @@
                         </ScrollPane>
                         <Button defaultButton="true" layoutX="436.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Save" />
                         <TextField layoutX="347.0" layoutY="48.0" promptText="Weight(kg)" />
-                        <TextField layoutX="14.0" layoutY="81.0" promptText="Time(sec)" />
+                        <TextField layoutX="347.0" layoutY="13.0" promptText="Time(sec)" />
                         <TextField layoutX="152.0" layoutY="331.0" prefHeight="25.0" prefWidth="115.0" promptText="Name Workout" />
                         <Button defaultButton="true" layoutX="509.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Add" />
                         <ScrollPane layoutX="180.0" layoutY="78.0">

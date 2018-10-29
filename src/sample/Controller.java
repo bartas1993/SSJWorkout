@@ -16,19 +16,21 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     private ObservableList<String> exercises = FXCollections.observableArrayList();
+    private ObservableList<String> exercisesBic = FXCollections.observableArrayList();
     @FXML public ProgressBar levelBar;
     @FXML public ProgressBar staminaBar;
     @FXML public ProgressBar strengthBar;
     @FXML public Label lv,class1,userExp,userExp2,totalExp;
     @FXML public ImageView itsOver9000,itsover15000,facebookLogIn;
     @FXML public Tab achievement;
-    @FXML public ComboBox<String> bodyPart;
+    @FXML public ComboBox<String> bodyPart,exerciseBox;
 
-    public void comboboxBodyParts(){
+    private void comboboxBodyParts() {
         //Initialize Connection//
         Connection con = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+        PreparedStatement pst;
+        ResultSet rs;
+        boolean isIt = false;
         try {
             con = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/exType?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
 
@@ -37,29 +39,64 @@ public class Controller implements Initializable {
         }
         if(con!=null)
         {
+
             System.out.println("Succesfull connection");
             try {
-                pst = con.prepareStatement("select * from biceps");
+                pst = con.prepareStatement("select * from bodytype");
                 rs = pst.executeQuery();
                 while (rs.next()){
                     exercises.addAll(rs.getString("name"));
                     bodyPart.setItems(exercises);
+                    isIt=true;
 
                 }
+                pst.close();
+                rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            finally {
-                try {
-                    pst.close();
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+
+
         }
     }
-    public boolean testConnection()
+    public void getTriceps()
+    {
+            Connection con2;
+            PreparedStatement pst2;
+            ResultSet rs2;
+            try {
+                con2 = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/exType?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
+                pst2 = con2.prepareStatement("Select * from triceps");
+                rs2 = pst2.executeQuery();
+                while (rs2.next()){
+                    exercisesBic.addAll(rs2.getString("name"));
+                    exerciseBox.setItems(exercisesBic);
+                }
+                con2.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+   public void getBiceps() {
+
+                    Connection con;
+                    PreparedStatement pst;
+                    ResultSet rs;
+                    try {
+                        con = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/exType?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
+                        pst = con.prepareStatement("Select * from biceps");
+                        rs = pst.executeQuery();
+                        while (rs.next()){
+                            exercisesBic.addAll(rs.getString("name"));
+                            exerciseBox.setItems(exercisesBic);
+                        }
+                        con.close();
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+    private boolean testConnection()
     {
         //test Connection//
         Connection con = null;
@@ -72,7 +109,9 @@ public class Controller implements Initializable {
             if(con!=null)
             {
                System.out.println("Tested working");
+
                return true;
+
             }
         return false;
     }
@@ -83,8 +122,8 @@ public class Controller implements Initializable {
         testConnection();
         if(testConnection()) {
             comboboxBodyParts(); //Add elements to combobox from database
-        }
 
+        }
         //LEVEL SYSTEM//
         String [] classes = {"KaioKen","SSJ","SSJ2","SSJ3","SSG","SSB","SSBKaioken",
                 "SSBKaiokenx20","Omen","UltraInstinct"};
@@ -187,5 +226,6 @@ public class Controller implements Initializable {
 
 
         });
+
     }
 }
