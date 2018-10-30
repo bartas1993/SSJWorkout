@@ -42,9 +42,9 @@
         <tabs>
             <Tab text="Log in">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: black;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                      <children>
-                        <ImageView fitHeight="373.0" fitWidth="607.0" opacity="0.35" pickOnBounds="true">
+                        <ImageView fitHeight="381.0" fitWidth="614.0" pickOnBounds="true">
                            <image>
                               <Image url="@PICS/233335.jpg" />
                            </image>
@@ -89,27 +89,23 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="170.0" layoutY="-13.0" text="WARNING!" textFill="RED">
+                        <Label layoutX="218.0" layoutY="-2.0" style="-fx-background-color: white;" text="WARNING!" textFill="RED">
                            <font>
-                              <Font size="54.0" />
+                              <Font size="35.0" />
                            </font>
                         </Label>
-                        <Label layoutX="51.0" layoutY="83.0" text="Please exercise with Caution and get plenty of rest!" textFill="#fffc00">
+                        <Label layoutX="57.0" layoutY="73.0" style="-fx-background-color: red;" text="Please exercise with Caution and get plenty of rest!" textFill="#fffc00">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="62.0" layoutY="55.0" text="We are not responsible for any injuries or trauma caused by your training" textFill="#ff6060">
+                        <Label layoutX="111.0" layoutY="40.0" style="-fx-background-color: white;" text="We are not responsible for any injuries or trauma caused by your training" textFill="#ff6060" />
+                        <Label layoutX="93.0" layoutY="57.0" style="-fx-background-color: white;" text="This application is made by fans for people who enjoy healthly lifestyle and Dragon Ball" textFill="#ff4444">
                            <font>
-                              <Font size="15.0" />
+                              <Font size="11.0" />
                            </font>
                         </Label>
-                        <Label layoutX="16.0" layoutY="71.0" text="This application is made by fans for people who enjoy healthly lifestyle and Dragon Ball" textFill="#ff4444">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="facebookLogIn" disable="true" fitHeight="73.0" fitWidth="254.0" layoutX="171.0" layoutY="204.0" opacity="0.3" pickOnBounds="true">
+                        <ImageView fx:id="facebookLogIn" fitHeight="73.0" fitWidth="254.0" layoutX="177.0" layoutY="289.0" pickOnBounds="true">
                            <image>
                               <Image url="@PICS/facebook-sign-in-button-png-26.png" />
                            </image>
@@ -117,8 +113,22 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <TextField disable="true" layoutX="178.0" layoutY="160.0" prefHeight="25.0" prefWidth="239.0" promptText="Username" />
-                        <PasswordField disable="true" layoutX="178.0" layoutY="190.0" prefHeight="25.0" prefWidth="239.0" promptText="Password" />
+                        <TextField layoutX="184.0" layoutY="198.0" prefHeight="25.0" prefWidth="239.0" promptText="Username" />
+                        <PasswordField layoutX="184.0" layoutY="225.0" prefHeight="25.0" prefWidth="239.0" promptText="Password" />
+                        <Label layoutX="177.0" layoutY="352.0" style="-fx-background-color: red;" text="BY LOGING IN YOU ACCEPT RESPONSIBILTY FOR YOUR OWN ACTIONS" textFill="#fffc00">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </Label>
+                        <Button defaultButton="true" layoutX="192.0" layoutY="253.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="223.0" text="Log in">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button defaultButton="true" layoutX="192.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="223.0" text="Register">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </AnchorPane>
               </content>
@@ -149,6 +159,7 @@
                                     <Image url="@PICS/Goku_ssj_by_dbzandsm-d4s2cd4.png" />
                                  </image>
                               </ImageView>
+                              <Button fx:id="addExp" layoutX="358.0" layoutY="152.0" mnemonicParsing="false" text="AddExp" />
                            </children>
                         </Pane>
                      </children>
@@ -188,44 +199,42 @@
                               <Image url="@PICS/goku_training_with_100g_by_sunnydjoka-d90wcbd.jpg" />
                            </image>
                         </ImageView>
-                        <ComboBox fx:id="bodyPart" layoutX="14.0" layoutY="13.0" onAction="#getBiceps" prefWidth="150.0" promptText="Body Part" />
-                        <ComboBox fx:id="exerciseBox" layoutX="179.0" layoutY="13.0" onAction="#getBiceps" prefWidth="150.0" promptText="Exercise Name" />
-                        <ComboBox layoutX="14.0" layoutY="48.0" prefWidth="150.0" promptText="Reps" />
-                        <ComboBox layoutX="179.0" layoutY="48.0" prefWidth="150.0" promptText="Sets" />
-                        <DatePicker layoutX="14.0" layoutY="331.0" prefHeight="25.0" prefWidth="131.0" promptText="Workout Date" />
+                        <ComboBox fx:id="bodyPart" layoutX="14.0" layoutY="13.0" prefWidth="150.0" promptText="Body Part" visible="false" />
+                        <ComboBox fx:id="exerciseBox" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="551.0" promptText="Exercise Name" />
+                        <ComboBox fx:id="repBox" layoutX="14.0" layoutY="48.0" prefHeight="25.0" prefWidth="70.0" promptText="Reps" />
+                        <ComboBox fx:id="setBox" layoutX="89.0" layoutY="48.0" prefHeight="25.0" prefWidth="75.0" promptText="Sets" />
+                        <DatePicker layoutX="14.0" layoutY="331.0" prefHeight="25.0" prefWidth="181.0" promptText="Workout Date" />
                         <ScrollPane layoutX="14.0" layoutY="126.0" prefHeight="202.0" prefWidth="549.0">
                            <content>
-                              <TableView prefHeight="201.0" prefWidth="592.0">
+                              <TableView fx:id="workoutTable" prefHeight="201.0" prefWidth="592.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Exercise" />
-                                  <TableColumn prefWidth="75.0" text="Body Part" />
-                                    <TableColumn prefWidth="96.66667175292969" text="Type" />
-                                    <TableColumn prefWidth="54.0" text="Reps" />
-                                    <TableColumn prefWidth="56.0" text="Sets" />
-                                    <TableColumn prefWidth="68.6666259765625" text="Weight" />
-                                    <TableColumn prefWidth="69.99993896484375" text="Time" />
-                                    <TableColumn prefWidth="80.00003051757812" text="Exp" />
-                                    <TableColumn prefWidth="75.0" text="Column X" />
+                                  <TableColumn fx:id="Exercise" prefWidth="75.0" text="Exercise" />
+                                  <TableColumn fx:id="BodyParts" prefWidth="75.0" text="Body Part" />
+                                    <TableColumn fx:id="Repss" prefWidth="54.0" text="Reps" />
+                                    <TableColumn fx:id="Setss" prefWidth="56.0" text="Sets" />
+                                    <TableColumn fx:id="Weight" prefWidth="68.6666259765625" text="Weight" />
+                                    <TableColumn fx:id="Time" prefWidth="69.99993896484375" text="Time" />
+                                    <TableColumn fx:id="Experience" prefWidth="80.00003051757812" text="Exp" />
                                 </columns>
                               </TableView>
                            </content>
                         </ScrollPane>
-                        <Button defaultButton="true" layoutX="436.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Save" />
-                        <TextField layoutX="347.0" layoutY="48.0" promptText="Weight(kg)" />
-                        <TextField layoutX="347.0" layoutY="13.0" promptText="Time(sec)" />
-                        <TextField layoutX="152.0" layoutY="331.0" prefHeight="25.0" prefWidth="115.0" promptText="Name Workout" />
-                        <Button defaultButton="true" layoutX="509.0" layoutY="95.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Add" />
-                        <ScrollPane layoutX="180.0" layoutY="78.0">
+                        <Button defaultButton="true" layoutX="489.0" layoutY="331.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Save" />
+                        <TextField layoutX="89.0" layoutY="88.0" prefHeight="25.0" prefWidth="73.0" promptText="Weight(kg)" />
+                        <TextField layoutX="14.0" layoutY="88.0" prefHeight="25.0" prefWidth="66.0" promptText="Time(sec)" />
+                        <TextField layoutX="201.0" layoutY="331.0" prefHeight="25.0" prefWidth="115.0" promptText="Name Workout" />
+                        <Button fx:id="addEX" defaultButton="true" layoutX="171.0" layoutY="48.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="87.0" text="Add" />
+                        <ScrollPane layoutX="267.0" layoutY="43.0" prefHeight="79.0" prefWidth="295.0">
                            <content>
-                              <TextArea prefHeight="43.0" prefWidth="309.0" promptText="Notes" />
+                              <TextArea prefHeight="73.0" prefWidth="298.0" promptText="Notes" />
                            </content>
                         </ScrollPane>
-                        <TextField disable="true" editable="false" layoutX="273.0" layoutY="331.0" prefWidth="155.0" promptText="Total EXP " style="-fx-border-color: null;" />
+                        <TextField editable="false" layoutX="324.0" layoutY="331.0" prefWidth="155.0" promptText="Total EXP " style="-fx-border-color: null;" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Hall of Fame">
+            <Tab text="Global Stats">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -254,21 +263,23 @@
                               <Image url="@PICS/c3800c8f5826a0d06346d59c31922af5.jpg" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="14.0" layoutY="32.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="63.0" fitWidth="82.0" layoutX="14.0" layoutY="32.0" opacity="0.09" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@PICS/4_Star_Dragon_Ball_Edit.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="itsOver9000" fitHeight="63.0" fitWidth="82.0" layoutX="88.0" layoutY="32.0" opacity="0.19" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="scouterImg" fitHeight="63.0" fitWidth="82.0" layoutX="88.0" layoutY="32.0" opacity="0.09" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@PICS/Scouter.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="itsover15000" fitHeight="98.0" fitWidth="99.0" layoutX="166.0" layoutY="14.0" opacity="0.19" pickOnBounds="true">
+                        <ImageView fx:id="kaiokenImg" fitHeight="98.0" fitWidth="99.0" layoutX="166.0" layoutY="14.0" opacity="0.09" pickOnBounds="true">
                            <image>
                               <Image url="@PICS/Goku_Kaioken.png" />
                            </image>
                         </ImageView>
+                        <Label fx:id="kaio" layoutX="135.0" layoutY="103.0" text="Achieve Power Level of 18.000" visible="false" />
+                        <Label fx:id="kaio1" layoutX="44.0" layoutY="103.0" text="Achieve Power Level of 9000" visible="false" />
                      </children>
                   </AnchorPane>
               </content>
