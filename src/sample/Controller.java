@@ -78,10 +78,11 @@ public class Controller implements Initializable {
                 pst = con.prepareStatement("select * from bodypart");
                 rs = pst.executeQuery();
                 while (rs.next()){
+                    isLoggedin = true;
                     exercises.addAll("NAME:"+ rs.getString("exname") +" /BODYPART:"+ rs.getString("bodypart") + " /EXP:"+ rs.getString("exp")+" /ENDURANCE:"
                             +rs.getString("endurance")+" /STRENGTH:"+rs.getString("strength") +" /SPEED:" +rs.getString("speed"));
                     exerciseBox.setItems(exercises);
-                    isLoggedin = true;
+
                 }
                 pst.close();
                 rs.close();
@@ -252,8 +253,9 @@ public class Controller implements Initializable {
                         gotExp2= rsx.getDouble("strength");
                         exp = rsx.getDouble("speed");
                         System.out.println("DATA SET");
-                        userExp.setText(String.valueOf(exp+2500));
-                        totalExp.setText(String.valueOf(exp + 2450 *1.01));
+                        userExp.setText(String.valueOf(exp));
+                        totalExp.setText(String.valueOf(exp +1.05));
+                        comboboxBodyParts(); //Add elements to Combo Box Body Parts from database
                         usernameF.setVisible(false);
                         passwordF.setVisible(false);
                         loginBtn.setVisible(false);
@@ -265,90 +267,90 @@ public class Controller implements Initializable {
                         registerBtn.setVisible(false);
                         gokuLogin.setOpacity(1);
                         website.setVisible(true);
-                        totalExpNeed = 9000;
-                        if(totalExpNeed >= 999999998)
-                        {
-                            int result =levelup;
-                            result++;
-                            levelBar.setProgress(0);
 
-                            userExp.setText(String.valueOf(exp));
-                            totalExpNeed+=50;
-                            lv.setText(String.valueOf(result));
+                    }
+                    totalExpNeed = 9000;
+                    if(totalExpNeed >= 999999998)
+                    {
+                        int result =levelup;
+                        result++;
+                        levelBar.setProgress(0);
 
-                            userExp2.setText(String.valueOf(totalExpNeed));
-                            class1.setText(classes[9]);
-                        }
-                        if(exp>=totalExpNeed)
-                        {
-                            totalExpNeed+=1000;
-                            int result =levelup;
-                            result++;
-                            userExp.setText(String.valueOf(exp));
-                            lv.setText(String.valueOf(result));
-                            userExp2.setText(String.valueOf(totalExpNeed));
-                            zero +=111;
-                            one +=111;
-                            two +=111;
-                            three +=111;
-                            four +=111;
-                            five +=111;
-                            six +=111;
-                            seven +=111;
-                            eight +=111;
-                            for(int a=0;a<classes.length;a++)
-                            {
-                                int i=0;
-                                class1.setText(classes[i]);
-                                i++;
-                            }
-                        }
-                        if (exp>=zero & exp<one)
-                        {
-                            levelBar.setProgress(0.45);
-                        }
-                        if (exp>=one & exp<two)
-                        {
-                            levelBar.setProgress(0.55);
-                        }
-                        if (exp>=two & exp<three)
-                        {
-                            levelBar.setProgress(0.65);
-                        }
-                        if (exp>=three & exp<four)
-                        {
-                            levelBar.setProgress(0.75);
-                        }
-                        if (exp>=four & exp<five)
-                        {
-                            levelBar.setProgress(0.85);
-                        }
-                        if (exp>=five & exp<six)
-                        {
-                            levelBar.setProgress(0.88);
-                        }
-                        if (exp>=six & exp<seven)
-                        {
-                            levelBar.setProgress(0.90);
-                        }
-                        if (exp>=seven & exp<eight)
-                        {
-                            levelBar.setProgress(0.92);
-                        }
+                        userExp.setText(String.valueOf(exp));
+                        totalExpNeed+=50;
+                        lv.setText(String.valueOf(result));
 
-                        if (exp>=9000){
-                            scouterImg.setOpacity(1.0);
-                            achievement.setText("Achievements('ITS...ITS OVER 9000!!')");
-                            achievement.setStyle(String.valueOf(Color.ROYALBLUE));
-                        }
-                        if (exp>=18000){
-
-                            kaiokenImg.setOpacity(1.0);
-                            achievement.setText("Achievements(KAIOKENNN!!)");
-                            achievement.setStyle(String.valueOf(Color.ROYALBLUE));
+                        userExp2.setText(String.valueOf(totalExpNeed));
+                        class1.setText(classes[9]);
+                    }
+                    if(exp>=totalExpNeed)
+                    {
+                        totalExpNeed+=1000;
+                        int result =levelup;
+                        result++;
+                        userExp.setText(String.valueOf(exp));
+                        lv.setText(String.valueOf(result));
+                        userExp2.setText(String.valueOf(totalExpNeed));
+                        zero +=111;
+                        one +=111;
+                        two +=111;
+                        three +=111;
+                        four +=111;
+                        five +=111;
+                        six +=111;
+                        seven +=111;
+                        eight +=111;
+                        for(int a=0;a<classes.length;a++)
+                        {
+                            int i=0;
+                            class1.setText(classes[i]);
+                            i++;
                         }
                     }
+                    if (exp>=zero & exp<one)
+                    {
+                        levelBar.setProgress(0.45);
+                    }
+                    if (exp>=one & exp<two)
+                    {
+                        levelBar.setProgress(0.55);
+                    }
+                    if (exp>=two & exp<three)
+                    {
+                        levelBar.setProgress(0.65);
+                    }
+                    if (exp>=three & exp<four)
+                    {
+                        levelBar.setProgress(0.75);
+                    }
+                    if (exp>=four & exp<five)
+                    {
+                        levelBar.setProgress(0.85);
+                    }
+                    if (exp>=five & exp<six)
+                    {
+                        levelBar.setProgress(0.88);
+                    }
+                    if (exp>=six & exp<seven)
+                    {
+                        levelBar.setProgress(0.90);
+                    }
+                    if (exp>=seven & exp<eight)
+                    {
+                        levelBar.setProgress(0.92);
+                    }
 
+                    if (exp>=9000){
+                        scouterImg.setOpacity(1.0);
+                        achievement.setText("Achievements('ITS...ITS OVER 9000!!')");
+                        achievement.setStyle(String.valueOf(Color.ROYALBLUE));
+                    }
+                    if (exp>=18000){
+
+                        kaiokenImg.setOpacity(1.0);
+                        achievement.setText("Achievements(KAIOKENNN!!)");
+                        achievement.setStyle(String.valueOf(Color.ROYALBLUE));
+                    }
 
                 }
 
