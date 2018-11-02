@@ -1,5 +1,5 @@
 package sample;
-
+import animatefx.animation.FadeIn;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +24,7 @@ public class Main extends Application {
         if (root != null) {
             primaryStage.setScene(new Scene(root, 595, 485));
             primaryStage.show();
+            new FadeIn(root).play();
         }
         else
             {

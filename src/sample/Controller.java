@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -19,19 +20,19 @@ public class Controller implements Initializable {
     private ObservableList<String> exercises = FXCollections.observableArrayList();
     private ObservableList<String> repOB = FXCollections.observableArrayList();
     private ObservableList<String> setBoxOB = FXCollections.observableArrayList();
-   // private ObservableList<String> addToWorkout = FXCollections.observableArrayList();//
-    @FXML public TableView workoutTable = new TableView();
-    @FXML public TableColumn Exercise = new TableColumn();
-    @FXML public TableColumn BodyParts = new TableColumn();
-    @FXML public TableColumn Repss = new TableColumn();
-    @FXML public TableColumn Setss = new TableColumn();
-    @FXML public TableColumn Weight = new TableColumn();
-    @FXML public TableColumn Time = new TableColumn();
-    @FXML public TableColumn Experience = new TableColumn();
+    private ObservableList<WorkoutTableController> addToWorkout = FXCollections.observableArrayList();//
+    @FXML public TableView<WorkoutTableController> workoutTable;
+    @FXML public TableColumn<WorkoutTableController,String> Exercise;
+    @FXML public TableColumn<WorkoutTableController,String> BodyParts;
+    @FXML public TableColumn<WorkoutTableController,Double> Repss;
+    @FXML public TableColumn<WorkoutTableController,Double> Setss;
+    @FXML public TableColumn<WorkoutTableController,Double> Weight;
+    @FXML public TableColumn<WorkoutTableController,Double> Time;
+    @FXML public TableColumn<WorkoutTableController,Double> Experience;
     @FXML public ProgressBar levelBar;
     @FXML public ProgressBar staminaBar;
     @FXML public ProgressBar strengthBar;
-    @FXML public Label lv,class1,userExp,userExp2,totalExp,kaio,kaio1,desc,warning,warning1,warning2,warning3;
+    @FXML public Label lv,class1,userExp,userExp2,totalExp,kaio,kaio1,desc,warning,warning1,warning2,warning3,userNameLabel;
     @FXML public ImageView facebookLogIn,scouterImg,kaiokenImg,gokuLogin;
     @FXML public Tab achievement,AvatarTab,WorkoutsTab,LogTab,GlobalTab;
     @FXML public ComboBox<String> bodyPart,exerciseBox,repBox,setBox;
@@ -46,10 +47,12 @@ public class Controller implements Initializable {
     }
     private boolean isLoggedin = false;
     private boolean tableCreated= false;
+    private boolean returnData = false;
     private double gotExp;
     private double gotExp2;
-    private double exp =gotExp+gotExp2;
-    private double totExp = gotExp+gotExp2;
+    private double gotExp3;
+    private double exp;
+    private double totExp;
     private double zero;
     private double one;
     private double two;
@@ -59,6 +62,8 @@ public class Controller implements Initializable {
     private double six;
     private double seven;
     private double eight;
+    private String tableName;
+    private String userExerciseTableName;
 
     private void comboboxBodyParts() {
         Connection con = null;
@@ -78,7 +83,7 @@ public class Controller implements Initializable {
                 pst = con.prepareStatement("select * from bodypart");
                 rs = pst.executeQuery();
                 while (rs.next()){
-                    isLoggedin = true;
+                    returnData=true;
                     exercises.addAll("NAME:"+ rs.getString("exname") +" /BODYPART:"+ rs.getString("bodypart") + " /EXP:"+ rs.getString("exp")+" /ENDURANCE:"
                             +rs.getString("endurance")+" /STRENGTH:"+rs.getString("strength") +" /SPEED:" +rs.getString("speed"));
                     exerciseBox.setItems(exercises);
@@ -178,6 +183,7 @@ public class Controller implements Initializable {
                 "Don't forget to eat well, sleep well and train well \n"+
                 "Have fun and stay HEALTHLY!!");
         alerto.showAndWait();
+
     }
     public void userLogIn()
     {
@@ -186,18 +192,18 @@ public class Controller implements Initializable {
         Connection con2;
         PreparedStatement pst;
         Statement pstTable;
-        String tableName = usernameF.getText()+"Table";
+        tableName = usernameF.getText()+"Table";
+        userExerciseTableName = tableName+"PersonalTable";
+
         ResultSet rs;
-        String sqlStatement = "SELECT username and password from users WHERE username=? and password =?";
-        String sqlStatement2 = "CREATE TABLE IF NOT EXISTS " +tableName+
-                "(endurance      DOUBLE,"+
-                "strength       DOUBLE,"+
-                "speed          DOUBLE)";
+        String sqlStatement = "SELECT user_id,username and password from users WHERE username=? and password =?";
+
         try {
             con = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
             pst = con.prepareStatement(sqlStatement);
             pst.setString(1,usernameF.getText());
-            pst.setString(2,passwordF.getText());
+            pst.setString(2,usernameF.getText());
+            pst.setString(3,passwordF.getText());
             rs = pst.executeQuery();
             LogTab.setDisable(true);
             AvatarTab.setDisable(false);
@@ -215,23 +221,15 @@ public class Controller implements Initializable {
             }
             else
                 {
-                    tableCreated=false;
-                    con2 = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
-                    pstTable =con2.createStatement();
-                    pstTable.executeUpdate(sqlStatement2);
-                    System.out.println("Table for user " + usernameF.getText() + " created");
-                    System.out.println("Table name is: " + tableName);
                     isLoggedin = true;
                     tableCreated=true;
-                    pstTable.close();
                     String [] classes = {"KaioKen","SSJ","Ultra SSJ","SSJ2","SSJ3","SSJRage","SSG","SSB","SSBKaioken","SSBKaiokenX10",
                             "SSBKaiokenx20","Mastered SSB","Omen","UltraInstinct"};
                     int levelup = 1;
                     double totalExpNeed = 9000;
                     userExp2.setText(String.valueOf(totalExpNeed));
                     lv.setText(String.valueOf(levelup));
-                    exp =gotExp+gotExp2;
-                    totExp = gotExp+gotExp2;
+
                     zero = 1000;
                     one = 2500;
                     two = 3500;
@@ -243,19 +241,22 @@ public class Controller implements Initializable {
                     eight = 9000;
                     Connection con3;
                     con3 = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
-                    String sqlQuery3 = "Select * from AdminTable";
+                    String sqlQuery3 = "Select * from "+tableName+"";
                     Statement psts = con3.createStatement();
                     ResultSet rsx = psts.executeQuery(sqlQuery3);
 
                     while (rsx.next())
                     {
+
+                        userNameLabel.setText(usernameF.getText());
                         gotExp= rsx.getDouble("endurance");
                         gotExp2= rsx.getDouble("strength");
-                        exp = rsx.getDouble("speed");
+                        gotExp3 = rsx.getDouble("speed");
+                        exp =gotExp+gotExp2+gotExp3;
+                        totExp = gotExp+gotExp2+gotExp3;
                         System.out.println("DATA SET");
                         userExp.setText(String.valueOf(exp));
-                        totalExp.setText(String.valueOf(exp +1.05));
-                        comboboxBodyParts(); //Add elements to Combo Box Body Parts from database
+                        totalExp.setText(String.valueOf(exp));
                         usernameF.setVisible(false);
                         passwordF.setVisible(false);
                         loginBtn.setVisible(false);
@@ -266,7 +267,14 @@ public class Controller implements Initializable {
                         warning3.setVisible(false);
                         registerBtn.setVisible(false);
                         gokuLogin.setOpacity(1);
-                        website.setVisible(true);
+                        //website.setVisible(true);
+                        playMusicGokuWelcome();
+                        disclai(); //Initialize information for the user
+
+
+
+
+
 
                     }
                     totalExpNeed = 9000;
@@ -370,15 +378,33 @@ public class Controller implements Initializable {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.isAutoPlay();
     }
+    private void playMusicGokuWelcome()
+    {
+        final URL resource = getClass().getResource("instant2.mp3");
+        final Media media = new Media(resource.toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(0.4);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
-                disclai(); //Initialize information for the user
+
             if (testConnection()) {
+                String connection = "jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false\", \"bartoszkepke09\", \"bartoszkepke00099912";
                 isLoggedin=true;
-                playMusic();
+
+                playMusic(); //Play music in the background
                 initializeGUIComponnents(); //Initialize GUI components and its behaviours
                 comboboxBodyParts(); //Add elements to Combo Box Body Parts from database
                 setRepsAndSets(); //Set values for Reps and Sets Combo Boxes
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("exercise1"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("bodyparts"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("notes"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("repetitions"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("setts"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("weights"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("times"));
+                Exercise.setCellValueFactory(new PropertyValueFactory<>("experiences"));
 
                 /**/
     }
