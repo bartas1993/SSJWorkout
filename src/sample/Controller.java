@@ -180,7 +180,7 @@ public class Controller implements Initializable {
             dialog1.setVisible(false);
             new Flash(gokuVoice).play();
             playMusicGokuWelcome();
-            playMusicGokuWelcome();
+
             dialogImage.setVisible(true);
             dialog1.setVisible(true);
 
