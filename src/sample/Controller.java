@@ -188,22 +188,17 @@ public class Controller implements Initializable {
     public void userLogIn()
     {
         //levelAndExpSystem();//Initialize Experience and Level System flow
+        String tableName = usernameF.getText()+"Table";
         Connection con;
-        Connection con2;
         PreparedStatement pst;
-        Statement pstTable;
-        tableName = usernameF.getText()+"Table";
-        userExerciseTableName = tableName+"PersonalTable";
-
         ResultSet rs;
-        String sqlStatement = "SELECT user_id,username and password from users WHERE username=? and password =?";
+        String sqlStatement = "SELECT * from users WHERE username=? and password =?";
 
         try {
             con = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
             pst = con.prepareStatement(sqlStatement);
             pst.setString(1,usernameF.getText());
-            pst.setString(2,usernameF.getText());
-            pst.setString(3,passwordF.getText());
+            pst.setString(2,passwordF.getText());
             rs = pst.executeQuery();
             LogTab.setDisable(true);
             AvatarTab.setDisable(false);
@@ -220,16 +215,33 @@ public class Controller implements Initializable {
                 alerto.showAndWait();
             }
             else
+
                 {
+                    pst.close();
+                    rs.close();
                     isLoggedin = true;
-                    tableCreated=true;
+                    String create="CREATE TABLE IF NOT EXISTS "+tableName+
+                            "(exp   DOUBLE)";
+                    PreparedStatement ps2 = con.prepareStatement(create);
+                        ps2.executeUpdate();
+                        tableCreated=true;
+                        ps2.close();
+                    String select="SELECT * from "+tableName;
+                    Statement ps3 = con.createStatement();
+                    ResultSet rs2 = ps3.executeQuery(select);
+
+                    while(rs2.next())
+                    {
+                        gotExp = rs2.getDouble("exp");
+                        System.out.println("SUCCESS!");
+                    }
+
                     String [] classes = {"KaioKen","SSJ","Ultra SSJ","SSJ2","SSJ3","SSJRage","SSG","SSB","SSBKaioken","SSBKaiokenX10",
                             "SSBKaiokenx20","Mastered SSB","Omen","UltraInstinct"};
                     int levelup = 1;
                     double totalExpNeed = 9000;
                     userExp2.setText(String.valueOf(totalExpNeed));
                     lv.setText(String.valueOf(levelup));
-
                     zero = 1000;
                     one = 2500;
                     two = 3500;
@@ -239,24 +251,14 @@ public class Controller implements Initializable {
                     six = 7500;
                     seven = 8500;
                     eight = 9000;
-                    Connection con3;
-                    con3 = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
-                    String sqlQuery3 = "Select * from "+tableName+"";
-                    Statement psts = con3.createStatement();
-                    ResultSet rsx = psts.executeQuery(sqlQuery3);
-
-                    while (rsx.next())
-                    {
-
                         userNameLabel.setText(usernameF.getText());
-                        gotExp= rsx.getDouble("endurance");
-                        gotExp2= rsx.getDouble("strength");
-                        gotExp3 = rsx.getDouble("speed");
-                        exp =gotExp+gotExp2+gotExp3;
-                        totExp = gotExp+gotExp2+gotExp3;
+                        exp =gotExp;
                         System.out.println("DATA SET");
-                        userExp.setText(String.valueOf(exp));
-                        totalExp.setText(String.valueOf(exp));
+                        userExp.setText(String.valueOf(gotExp));
+                        userExp2.setText(String.valueOf(totalExpNeed));
+                        totalExp.setText(String.valueOf(gotExp));
+                        levelBar.setVisible(true);
+                        totalExp.setVisible(true);
                         usernameF.setVisible(false);
                         passwordF.setVisible(false);
                         loginBtn.setVisible(false);
@@ -270,13 +272,6 @@ public class Controller implements Initializable {
                         //website.setVisible(true);
                         playMusicGokuWelcome();
                         disclai(); //Initialize information for the user
-
-
-
-
-
-
-                    }
                     totalExpNeed = 9000;
                     if(totalExpNeed >= 999999998)
                     {
@@ -293,7 +288,7 @@ public class Controller implements Initializable {
                     }
                     if(exp>=totalExpNeed)
                     {
-                        totalExpNeed+=1000;
+                        totalExpNeed+=gotExp*1.5;
                         int result =levelup;
                         result++;
                         userExp.setText(String.valueOf(exp));
@@ -317,35 +312,35 @@ public class Controller implements Initializable {
                     }
                     if (exp>=zero & exp<one)
                     {
-                        levelBar.setProgress(0.45);
+                        levelBar.setProgress(0.25);
                     }
                     if (exp>=one & exp<two)
                     {
-                        levelBar.setProgress(0.55);
+                        levelBar.setProgress(0.35);
                     }
                     if (exp>=two & exp<three)
                     {
-                        levelBar.setProgress(0.65);
+                        levelBar.setProgress(0.45);
                     }
                     if (exp>=three & exp<four)
                     {
-                        levelBar.setProgress(0.75);
+                        levelBar.setProgress(0.55);
                     }
                     if (exp>=four & exp<five)
                     {
-                        levelBar.setProgress(0.85);
+                        levelBar.setProgress(0.65);
                     }
                     if (exp>=five & exp<six)
                     {
-                        levelBar.setProgress(0.88);
+                        levelBar.setProgress(0.75);
                     }
                     if (exp>=six & exp<seven)
                     {
-                        levelBar.setProgress(0.90);
+                        levelBar.setProgress(0.85);
                     }
                     if (exp>=seven & exp<eight)
                     {
-                        levelBar.setProgress(0.92);
+                        levelBar.setProgress(0.95);
                     }
 
                     if (exp>=9000){

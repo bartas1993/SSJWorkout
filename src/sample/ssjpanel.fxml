@@ -51,9 +51,8 @@
          </children></Pane>
       <Pane layoutY="452.0" prefHeight="44.0" prefWidth="607.0" style="-fx-background-color: orange;">
          <children>
-            <ProgressBar fx:id="levelBar" layoutX="4.0" layoutY="21.0" prefHeight="18.0" prefWidth="172.0" progress="0.0" />
-            <Label layoutX="3.0" layoutY="5.0" text="POWER:" />
-            <Label fx:id="totalExp" layoutX="48.0" layoutY="-1.0" prefHeight="27.0" prefWidth="550.0" text="--" textFill="RED">
+            <ProgressBar fx:id="levelBar" layoutX="4.0" layoutY="21.0" prefHeight="18.0" prefWidth="600.0" progress="0.0" visible="false" />
+            <Label fx:id="totalExp" layoutX="5.0" layoutY="-1.0" prefHeight="27.0" prefWidth="600.0" text="--" textFill="RED" visible="false">
                <font>
                   <Font size="17.0" />
                </font>
@@ -164,13 +163,13 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab fx:id="AvatarTab" disable="true" text="Avatar">
+          <Tab fx:id="AvatarTab" text="Avatar">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: orange;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="607.0" style="-fx-background-color: orange;">
                      <children>
                         <Pane prefHeight="345.0" prefWidth="607.0" style="-fx-background-color: orange;">
                            <children>
-                              <ImageView fitHeight="315.0" fitWidth="614.0" pickOnBounds="true">
+                              <ImageView fitHeight="313.0" fitWidth="614.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@PICS/thumb-1920-677266.png" />
                                  </image>
@@ -185,7 +184,7 @@
                               <Label fx:id="userExp2" layoutX="97.0" layoutY="80.0" text="--" textFill="#00ff6f" />
                               <ProgressBar layoutX="8.0" layoutY="175.0" prefHeight="18.0" prefWidth="216.0" progress="0.0" />
                               <Label layoutX="234.0" layoutY="176.0" text="Speed" />
-                              <ImageView fitHeight="358.0" fitWidth="185.0" layoutX="386.0" layoutY="15.0" pickOnBounds="true">
+                              <ImageView fitHeight="385.0" fitWidth="185.0" layoutX="422.0" layoutY="-3.0" pickOnBounds="true">
                                  <image>
                                     <Image url="@PICS/Goku_ssj_by_dbzandsm-d4s2cd4.png" />
                                  </image>

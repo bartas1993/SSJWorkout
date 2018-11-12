@@ -12,6 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        System.setProperty( "javafx.userAgentStylesheetUrl", "CASPIAN" );
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("ssjpanel.fxml"));
