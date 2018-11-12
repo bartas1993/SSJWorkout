@@ -1,4 +1,5 @@
 package sample;
+import animatefx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +21,6 @@ public class Controller implements Initializable {
     private ObservableList<String> exercises = FXCollections.observableArrayList();
     private ObservableList<String> repOB = FXCollections.observableArrayList();
     private ObservableList<String> setBoxOB = FXCollections.observableArrayList();
-    private ObservableList<WorkoutTableController> addToWorkout = FXCollections.observableArrayList();//
     @FXML public TableView<WorkoutTableController> workoutTable;
     @FXML public TableColumn<WorkoutTableController,String> Exercise;
     @FXML public TableColumn<WorkoutTableController,String> BodyParts;
@@ -32,8 +32,8 @@ public class Controller implements Initializable {
     @FXML public ProgressBar levelBar;
     @FXML public ProgressBar staminaBar;
     @FXML public ProgressBar strengthBar;
-    @FXML public Label lv,class1,userExp,userExp2,totalExp,kaio,kaio1,desc,warning,warning1,warning2,warning3,userNameLabel;
-    @FXML public ImageView facebookLogIn,scouterImg,kaiokenImg,gokuLogin;
+    @FXML public Label lv,class1,userExp,userExp2,totalExp,kaio,kaio1,desc,warning,warning1,warning2,warning3,userNameLabel,dialog1;
+    @FXML public ImageView facebookLogIn,scouterImg,kaiokenImg,gokuLogin,gokuVoice,dialogImage;
     @FXML public Tab achievement,AvatarTab,WorkoutsTab,LogTab,GlobalTab;
     @FXML public ComboBox<String> bodyPart,exerciseBox,repBox,setBox;
     @FXML public Button addEX,loginBtn,registerBtn;
@@ -45,14 +45,11 @@ public class Controller implements Initializable {
     public Controller() {
 
     }
-    private boolean isLoggedin = false;
+
     private boolean tableCreated= false;
     private boolean returnData = false;
     private double gotExp;
-    private double gotExp2;
-    private double gotExp3;
     private double exp;
-    private double totExp;
     private double zero;
     private double one;
     private double two;
@@ -120,8 +117,6 @@ public class Controller implements Initializable {
     }
     //EXPERIENCE AND LEVELING SYSTEM//////////////////////////////////////////////////////////////////////////////////////
    //public void levelAndExpSystem(){
-
-
     //}
     private void setRepsAndSets()
     {
@@ -172,6 +167,31 @@ public class Controller implements Initializable {
         {
 
         });
+        gokuVoice.setOnMouseEntered(e->
+        {
+
+            dialogImage.setVisible(true);
+            dialog1.setVisible(true);
+
+        });
+        gokuVoice.setOnMouseClicked(e->
+        {
+            dialogImage.setVisible(false);
+            dialog1.setVisible(false);
+            new Flash(gokuVoice).play();
+            playMusicGokuWelcome();
+            playMusicGokuWelcome();
+            dialogImage.setVisible(true);
+            dialog1.setVisible(true);
+
+        });
+        gokuVoice.setOnMouseExited(e->
+        {
+            dialogImage.setVisible(false);
+            dialog1.setVisible(false);
+        });
+
+
     }
     private void disclai()
     {
@@ -188,7 +208,7 @@ public class Controller implements Initializable {
     public void userLogIn()
     {
         //levelAndExpSystem();//Initialize Experience and Level System flow
-        String tableName = usernameF.getText()+"Table";
+        tableName = usernameF.getText()+"Table";
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
@@ -215,13 +235,10 @@ public class Controller implements Initializable {
                 alerto.showAndWait();
             }
             else
-
                 {
                     pst.close();
                     rs.close();
-                    isLoggedin = true;
-                    String create="CREATE TABLE IF NOT EXISTS "+tableName+
-                            "(exp   DOUBLE)";
+                    String create="CREATE TABLE IF NOT EXISTS "+tableName+ " (exp DOUBLE, weight DOUBLE, height DOUBLE, endurance DOUBLE , strength DOUBLE, speed DOUBLE)";
                     PreparedStatement ps2 = con.prepareStatement(create);
                         ps2.executeUpdate();
                         tableCreated=true;
@@ -366,9 +383,10 @@ public class Controller implements Initializable {
     }
     private void playMusic()
     {
-        final URL resource = getClass().getResource("theme.mp3");
+        final URL resource = getClass().getResource("theme2.mp3");
         final Media media = new Media(resource.toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(0.6);
         mediaPlayer.play();
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.isAutoPlay();
@@ -379,15 +397,25 @@ public class Controller implements Initializable {
         final Media media = new Media(resource.toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
-        mediaPlayer.setVolume(0.4);
+        mediaPlayer.setVolume(1);
+    }
+    private void playClick()
+    {
+        final URL resource = getClass().getResource("mouse_click.mp3");
+        final Media media = new Media(resource.toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(0.5);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
 
+        loginBtn.setOnMouseClicked(e->
+        {
+            playClick();
+            System.out.println("CLICK SOUND");
+        });
             if (testConnection()) {
-                String connection = "jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false\", \"bartoszkepke09\", \"bartoszkepke00099912";
-                isLoggedin=true;
-
                 playMusic(); //Play music in the background
                 initializeGUIComponnents(); //Initialize GUI components and its behaviours
                 comboboxBodyParts(); //Add elements to Combo Box Body Parts from database
@@ -401,7 +429,6 @@ public class Controller implements Initializable {
                 Exercise.setCellValueFactory(new PropertyValueFactory<>("times"));
                 Exercise.setCellValueFactory(new PropertyValueFactory<>("experiences"));
 
-                /**/
     }
 
 
