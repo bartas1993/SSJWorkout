@@ -164,23 +164,14 @@ public class Controller implements Initializable {
             kaio.setVisible(false);
         });
         addEX.setOnMouseClicked(event ->
-        {
+                addToUsersPara());
 
-        });
-        gokuVoice.setOnMouseEntered(e->
-        {
-
-            dialogImage.setVisible(true);
-            dialog1.setVisible(true);
-
-        });
         gokuVoice.setOnMouseClicked(e->
         {
             dialogImage.setVisible(false);
             dialog1.setVisible(false);
-            new Flash(gokuVoice).play();
+            new FadeIn(gokuVoice).play();
             playMusicGokuWelcome();
-
             dialogImage.setVisible(true);
             dialog1.setVisible(true);
 
@@ -238,7 +229,10 @@ public class Controller implements Initializable {
                 {
                     pst.close();
                     rs.close();
-                    String create="CREATE TABLE IF NOT EXISTS "+tableName+ " (exp DOUBLE, weight DOUBLE, height DOUBLE, endurance DOUBLE , strength DOUBLE, speed DOUBLE)";
+                    String create="CREATE TABLE IF NOT EXISTS "+tableName+
+                            " (user_id  INTEGER PRIMARY KEY AUTO_INCREMENT,exp DOUBLE, weight DOUBLE, height DOUBLE, " +
+                            "endurance DOUBLE , strength DOUBLE, " +
+                            "speed DOUBLE, mobility DOUBLE, hp DOUBLE)";
                     PreparedStatement ps2 = con.prepareStatement(create);
                         ps2.executeUpdate();
                         tableCreated=true;
@@ -383,7 +377,7 @@ public class Controller implements Initializable {
     }
     private void playMusic()
     {
-        final URL resource = getClass().getResource("theme2.mp3");
+        final URL resource = getClass().getResource("theme.mp3");
         final Media media = new Media(resource.toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(0.6);
@@ -407,6 +401,32 @@ public class Controller implements Initializable {
         mediaPlayer.play();
         mediaPlayer.setVolume(0.5);
     }
+
+    public void addToUsersPara()
+    {
+        String add = "Update "+tableName+" Set exp=?,weight=?,height=?,endurance=?,strength=?,speed=?,mobility=?,hp=? Where user_id=1";
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://stockcontrolldb.cv19wxrr0zdu.us-east-2.rds.amazonaws.com/extype?verifyServerCertificate=false&useSSL=false", "bartoszkepke09", "bartoszkepke00099912");
+            PreparedStatement pst = con.prepareStatement(add);
+
+                pst.setDouble(1,+9000);
+                pst.setDouble(2,+9000);
+                pst.setDouble(3,+9000);
+                pst.setDouble(4,+9000);
+                pst.setDouble(5,+9000);
+                pst.setDouble(6,+9000);
+                pst.setDouble(7,+9000);
+                pst.setDouble(8,+9000);
+            pst.execute();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources)  {
 
